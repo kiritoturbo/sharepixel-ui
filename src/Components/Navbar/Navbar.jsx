@@ -4,6 +4,7 @@ import { SiConsul } from "react-icons/si";
 import { BsPhoneVibrate } from "react-icons/bs";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { FcMenu } from "react-icons/fc";
+import { Link } from 'react-router-dom'
 
 // import logo from '../../Assets/logo.png'
 function Navbar() {
@@ -49,8 +50,11 @@ function Navbar() {
         </div>
 
         <div className="atb flex">
+        <Link to="/login">
           <span>Sign In</span>
-          <span>Sign Out</span>
+        </Link>
+
+        <span>Sign Out</span>
         </div>
       </div>
 
@@ -61,21 +65,27 @@ function Navbar() {
 
         <div className={active}>
           <ul className="menu flex">
-            <li onClick={removeNavBar} className="listItem">
-              Home
-            </li>
-            <li onClick={removeNavBar} className="listItem">
-              About
-            </li>
-            <li onClick={removeNavBar} className="listItem">
-              Offers
-            </li>
-            <li onClick={removeNavBar} className="listItem">
+            <Link to="/">
+              <li onClick={removeNavBar} className="listItem">
+                Home
+              </li>
+            </Link>
+            <Link to="/accesstokenfacebook">
+              <li onClick={removeNavBar} className="listItem">
+                Update Token Facebook
+              </li>
+            </Link>
+            <Link to="/historysharepx">
+              <li onClick={removeNavBar} className="listItem">
+                History - Share Pixel
+              </li>
+            </Link>
+            {/* <li onClick={removeNavBar} className="listItem">
               Seats
             </li>
             <li onClick={removeNavBar} className="listItem">
               Destinations
-            </li>
+            </li> */}
           </ul>
 
           <button onClick={removeNavBar} className="btn flex btnOne">

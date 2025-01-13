@@ -21,6 +21,33 @@
   --inputColor: hsl(330, 12%, 97%);
   --boxShadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
   --transition: .4s ease-in-out;
+  --hue: 223;
+  --sat1: 10%;
+  --sat2: 90%;
+  --light-gray1: hsl(var(--hue),var(--sat1),95%);
+  --light-gray2: hsl(var(--hue),var(--sat1),90%);
+  --light-gray3: hsl(var(--hue),var(--sat1),85%);
+  --light-gray4: hsl(var(--hue),var(--sat1),80%);
+  --light-gray5: hsl(var(--hue),var(--sat1),75%);
+  --light-gray6: hsl(var(--hue),var(--sat1),70%);
+  --light-gray7: hsl(var(--hue),var(--sat1),65%);
+  --light-gray8: hsl(var(--hue),var(--sat1),60%);
+  --light-gray9: hsl(var(--hue),var(--sat1),55%);
+  --dark-gray1: hsl(var(--hue),var(--sat1),45%);
+  --dark-gray2: hsl(var(--hue),var(--sat1),40%);
+  --dark-gray3: hsl(var(--hue),var(--sat1),35%);
+  --dark-gray4: hsl(var(--hue),var(--sat1),30%);
+  --dark-gray5: hsl(var(--hue),var(--sat1),25%);
+  --dark-gray6: hsl(var(--hue),var(--sat1),20%);
+  --dark-gray7: hsl(var(--hue),var(--sat1),15%);
+  --dark-gray8: hsl(var(--hue),var(--sat1),10%);
+  --dark-gray9: hsl(var(--hue),var(--sat1),5%);
+  --primary1: hsl(var(--hue),var(--sat2),70%);
+  --primary2: hsl(var(--hue),var(--sat2),60%);
+  --primary3: hsl(var(--hue),var(--sat2),50%);
+  --primary4: hsl(var(--hue),var(--sat2),40%);
+  --primary5: hsl(var(--hue),var(--sat2),30%);
+  --trans-dur: 0.25s;
 }
 
 body {
@@ -241,51 +268,156 @@ h2 {
   flex-direction: column;
   background-color: #f2f6f9;
 }
+.home #idads {
+  font-size: 15px;
+}
+.home .submitSharePixel {
+  width: 100%;
+  margin: 10px;
+}
 .home .mainText {
   color: var(--blackColor);
   font-weight: 700;
   font-size: 15px;
   line-height: 2.5rem;
 }
-.home .homeImages {
+.home .homeBoxLeftRight {
+  display: flex;
+  flex-direction: column;
+}
+.home .homeBoxLeftRight .homeContentLeft {
+  flex: 1;
+  margin: 20px 0;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  padding: 2rem;
+}
+.home .homeBoxLeftRight .homeContentLeft .exportExcel {
+  background-color: var(--colorOne);
+}
+.home .homeBoxLeftRight .homeContentLeft textarea {
+  border: 1px solid #ccc;
   width: 100%;
-  margin: 1rem auto 0;
-  justify-content: center;
+}
+.home .homeBoxLeftRight .homeContentLeft label {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  font-family: "Montserrat", sans-serif;
+}
+.home .homeBoxLeftRight .homeContentLeft #listbmid {
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 48px;
+}
+.home .homeBoxLeftRight .homeContentRight {
+  flex: 1;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  position: relative;
-  border-radius: 5rem;
+  gap: 1.5em;
+  padding: 2em;
+  width: 100%;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
 }
-.home .homeImages .videoDiv {
+.home .homeBoxLeftRight .homeContentRight label {
+  font-weight: bold;
+  color: #333;
+}
+.home .homeBoxLeftRight .homeContentRight .homeListCheckboxPixel {
   width: 100%;
 }
-.home .homeImages .videoDiv .video {
-  border-radius: 10rem;
+.home .homeBoxLeftRight .homeContentRight .homeListCheckboxPixel .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
-.home .homeImages .plane {
-  position: absolute;
+.home .homeBoxLeftRight .homeContentRight .homeListCheckboxPixel .checkbox {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0.75em 1em;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.home .homeBoxLeftRight .homeContentRight .homeListCheckboxPixel .checkbox:hover {
+  background-color: #f1f1f1;
+  border-color: #ccc;
+  transform: scale(1.02);
+}
+.home .homeBoxLeftRight .homeContentRight .homeListCheckboxPixel .checkbox__input {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 1em;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.home .homeBoxLeftRight .homeContentRight .homeListCheckboxPixel .checkbox__input:checked {
+  background-color: var(--PrimaryColor);
+  border-color: var(--PrimaryColor);
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="white" d="M6 10.6l7-7-1.4-1.4L6 7.8 4.4 6.2 3 7.6l3 3z"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 70%;
+}
+.home .homeBoxLeftRight .homeContentRight .homeListCheckboxPixel .checkbox__label {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-size: 1rem;
+  color: #333;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: justify;
+}
+.home .homeBoxLeftRight .homeContentRight .homeListCheckboxPixel .checkbox__label span {
+  margin-top: 10px;
+  text-wrap: auto;
+}
+.home .homehistoryshare {
   width: 100%;
-  top: -10%;
+}
+.home .homehistoryshare .homehistoryitem {
+  height: 100%;
 }
 
+.loginpage {
+  padding-top: 10rem;
+  text-align: center;
+  gap: 2rem;
+  flex-direction: column;
+  background-color: #f2f6f9;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 @media screen and (min-width: 480px) {
   .home {
     padding-top: 12rem;
-  }
-  .search .sectionContainer .searchInputs {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .travelers .sectionContainer .travelersContainer {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .subscribe .sectionContainer {
-    max-width: 80%;
-    margin: auto;
-  }
-  .subscribe .sectionContainer .inputDiv {
-    flex-direction: row;
-    padding: 0 0.5rem;
-    border-radius: 3rem;
   }
   .footer .sectionContainer {
     align-items: flex-start;
@@ -307,34 +439,6 @@ h2 {
     width: 95%;
     top: -8%;
   }
-  .search .sectionContainer .btns {
-    border-radius: 3rem;
-    flex-direction: row;
-  }
-  .support .sectionContainer .infoDiv .textDiv {
-    margin-top: 2rem;
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .info .infoContainer .titleDiv {
-    flex-direction: row;
-  }
-  .info .infoContainer .titleDiv h2 {
-    text-align: left;
-    max-width: 500px;
-  }
-  .info .infoContainer .cardsDiv {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .lounge .sectionContainer .textDiv .grids {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .subscribe .sectionContainer .inputDiv {
-    justify-content: space-between;
-  }
-  .subscribe .sectionContainer .inputDiv .btn {
-    max-width: -moz-max-content;
-    max-width: max-content;
-  }
   .footer .sectionContainer {
     padding-top: 2rem;
     grid-template-columns: repeat(3, 1fr);
@@ -343,25 +447,6 @@ h2 {
 @media screen and (min-width: 680px) {
   .home .mainText {
     width: 80%;
-  }
-  .home .homeImages .videoDiv {
-    width: 80%;
-  }
-  .home .homeImages .videoDiv .video {
-    height: 100%;
-    width: 100%;
-    border-radius: 15rem;
-  }
-  .home .homeImages .plane {
-    width: 95%;
-    top: -8px;
-  }
-  .search .sectionContainer .btn {
-    border-radius: 3rem;
-    flex-direction: row;
-  }
-  .search .sectionContainer .searchInputs {
-    grid-template-columns: repeat(2, 1fr);
   }
   .footer .sectionContainer {
     grid-template-columns: repeat(4, 1fr);
@@ -468,13 +553,6 @@ h2 {
     font-size: 22px;
     line-height: 4rem;
   }
-  .search .sectionContainer .searchInputs {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .travelers .sectionContainer .travelersContainer {
-    grid-template-columns: repeat(4, 1fr);
-    margin: 3rem 0;
-  }
 }
 @media screen and (min-width: 1024px) {
   p {
@@ -490,10 +568,6 @@ h2 {
   .section {
     padding: 6rem 0 4rem;
   }
-  .container {
-    width: 75%;
-    margin: auto;
-  }
   .navBar .navBarOne,
   .navBar .navBarTwo {
     padding: 1.5rem 5rem;
@@ -506,23 +580,9 @@ h2 {
     font-size: 25px;
     line-height: 4rem;
   }
-  .home .homeImages .video {
-    width: 90%;
-    height: 300px;
-  }
-  .home .homeImages .video .video {
-    height: 100%;
-    width: 100%;
-    -o-object-fit: cover;
-       object-fit: cover;
-    border-radius: 15rem;
-  }
-  .home .homeImages .plane {
-    width: 100%;
-    top: -10%;
-  }
-  .search .sectionContainer .btns {
-    width: 50%;
+  .home .homeBoxLeftRight {
+    flex-direction: row;
+    gap: 20px;
   }
 }
 @media screen and (min-width: 1106px) {
