@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../../main.css";
 import { SiConsul } from "react-icons/si";
 import { BsPhoneVibrate } from "react-icons/bs";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { FcMenu } from "react-icons/fc";
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from "../AuthContext/AuthContext";
 
 // import logo from '../../Assets/logo.png'
 function Navbar() {
   // show menu in the smaill width screens
   const [active, setActive] = useState("navBarMenu");
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const [username, setUsername] = useState(null);
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const showNavBar = () => {
     setActive("navBarMenu showNavBar");
@@ -17,6 +27,12 @@ function Navbar() {
 
   const removeNavBar = () => {
     setActive("navBarMenu");
+  };
+
+  const handleSignOut = () => {
+    logout();
+    setUsername(null); // Cập nhật trạng thái
+    navigate("/login"); // Điều hướng về trang đăng nhập
   };
 
   ///add a backgroud color to the second navbar
@@ -36,9 +52,11 @@ function Navbar() {
       <div className="navBarOne flex">
         <div>
           <SiConsul className="icon" />
+          {/* <img src="https://truestore.vn/wp-content/themes/twentysixteen/assets/images/brand-logos/desktop-logo.svg" alt="" className="icon" /> */}
+
         </div>
 
-        <div className="none flex">
+        {/* <div className=" flex none">
           <li className="flex">
             <BsPhoneVibrate className="icon" />
             Support
@@ -47,20 +65,31 @@ function Navbar() {
             <AiOutlineGlobal className="icon" />
             Language
           </li>
-        </div>
+        </div> */}
 
         <div className="atb flex">
-        <Link to="/login">
-          <span>Sign In</span>
-        </Link>
+          {/* <Link to="/login">
+            <span>Sign In</span>
+          </Link>
 
-        <span>Sign Out</span>
+          <span onClick={handleSignOut}>Sign Out</span> */}
+          {username ? (
+            <>
+              <span>Welcome, {username}</span>
+              <span onClick={handleSignOut} className="signOut">Sign Out</span>
+            </>
+          ) : (
+            <Link to="/login">
+              <span>Sign In</span>
+            </Link>
+          )}
+
         </div>
       </div>
 
       <div className={noBg}>
         <div className="logoDiv">
-          {/* <img src={logo} alt="" className="logo" /> */}
+          <img src="https://truestore.vn/wp-content/themes/twentysixteen/assets/images/brand-logos/desktop-white.svg" alt="" className="logo" />
         </div>
 
         <div className={active}>
@@ -78,6 +107,11 @@ function Navbar() {
             <Link to="/historysharepx">
               <li onClick={removeNavBar} className="listItem">
                 History - Share Pixel
+              </li>
+            </Link>
+            <Link to="/historysharepxtotal">
+              <li onClick={removeNavBar} className="listItem">
+                History - Share Pixel admin
               </li>
             </Link>
             {/* <li onClick={removeNavBar} className="listItem">

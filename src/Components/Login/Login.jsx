@@ -15,33 +15,48 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
-    try {
-      const response = await axios.post(
-        `https://truestore.vn/wp-json/api/v1/checkloginsharepixel`,
-        { username, password }
-      );
-      if (response.data.success) {
-        const token = response.data.data.accesstoken; 
-        login(token); 
-        window.location.href = "/";
-      } else {
-        toast.error("Invalid login credentials.");
+    if (username && password) { // Kiểm tra giá trị trước khi xử lý
+      try {
+        const response = await axios.post(
+          `https://truestore.vn/wp-json/api/v1/checkloginsharepixel`,
+          { username, password }
+        );
+        if (response.data.success) {
+          const token = response.data.data.accesstoken; 
+          const username = response.data.data.name; 
+          login(token,username); 
+          window.location.href = "/";
+        } else {
+          toast.error("Invalid login credentials.");
+        }
+      } catch (error) {
+        if (error.response) {
+          // Máy chủ trả về phản hồi lỗi
+          const status = error.response.status;
+          const message = error.response.data.data.message || "An error occurred.";
+          toast.error(`Error ${status}: ${message}`);
+        } else if (error.request) {
+          // Không nhận được phản hồi từ máy chủ
+          toast.error("No response received from the server.");
+        } else {
+          // Lỗi khác
+          toast.error("An error occurred: " + error.message);
+        }
+        // console.error("Login error:", error);
+      
       }
-    } catch (error) {
-      if (error.response) {
-        // Máy chủ trả về phản hồi lỗi
-        const status = error.response.status;
-        const message = error.response.data.data.message || "An error occurred.";
-        toast.error(`Error ${status}: ${message}`);
-      } else if (error.request) {
-        // Không nhận được phản hồi từ máy chủ
-        toast.error("No response received from the server.");
+    }else {
+      toast.error("Please fill in both fields.");
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      if (username && password) { // Kiểm tra giá trị trước khi xử lý
+        handleLogin();
       } else {
-        // Lỗi khác
-        toast.error("An error occurred: " + error.message);
+        toast.error("Please fill in both fields.");
       }
-      // console.error("Login error:", error);
-    
     }
   };
 
@@ -78,6 +93,7 @@ const Login = () => {
           type={showPassword ? "text" : "password"}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={handleKeyDown}
           sx={{ marginBottom: 2 }}
           InputProps={{
             endAdornment: (

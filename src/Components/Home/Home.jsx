@@ -179,6 +179,7 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [results, setResults] = useState("");
   const [resultsArray, setResultsArray] = useState([]); // Lưu kết quả dạng mảng
+  const [isLoading, setIsLoading] = useState(false);
   const apiUrl = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
@@ -211,6 +212,7 @@ const Home = () => {
   }, []);
 
   const handleSharePixel = async () => {
+    setIsLoading(true);
     const textarea = document.getElementById("idads");
     const idAdsList = textarea.value
       .split("\n")
@@ -222,6 +224,7 @@ const Home = () => {
       toast.error(
         "Vui lòng chỉ nhập các số, không được có chữ trong danh sách ID quảng cáo."
       );
+      setIsLoading(false);
       return;
     }
 
@@ -237,6 +240,7 @@ const Home = () => {
       toast.error(
         "Vui lòng chọn ít nhất một tài khoản quảng cáo và một pixel."
       );
+      setIsLoading(false);
       return;
     }
 
@@ -265,8 +269,8 @@ const Home = () => {
               })
               .then((response) => {
                 const result = response.data.success
-                  ? `Pixel ${pixel.idpixel} được share thành công cho tài khoản quảng cáo ${idAds}`
-                  : `******Không thể share pixel ${pixel.idpixel} cho tài khoản quảng cáo ${idAds}. Token: ${response.data.usedToken}*****`;
+                  ? `Pixel ${pixel.idpixel} - share thành công cho tài khoản quảng cáo ${idAds}`
+                  : `******Không thể share pixel ${pixel.idpixel} cho tài khoản quảng cáo ${idAds}*****`;
                 setResults((prev) => prev + result + "\n");
                 setResultsArray((prev) => [
                   ...prev,
@@ -289,15 +293,28 @@ const Home = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Có lỗi xảy ra khi share pixel-Liên hệ Trường Dev");
+      // toast.error("Có lỗi xảy ra khi share pixel-Liên hệ Trường Dev");
+    }finally {
+      setIsLoading(false); // Kết thúc tải
     }
   };
-
+  
+  
   const handleExportExcel = () => {
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+        .toString()
+        .padStart(2, "0")}-${currentDate
+        .getDate()
+        .toString()
+        .padStart(2, "0")}`;
     const worksheet = XLSX.utils.json_to_sheet(resultsArray);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "ShareResults");
-    XLSX.writeFile(workbook, "Share_results.xlsx");
+    const fileName = `Share_results_${formattedDate}.xlsx`;
+    // XLSX.writeFile(workbook, "Share_results.xlsx");
+    // Xuất file
+    XLSX.writeFile(workbook, fileName);
   };
 
   return (
@@ -316,7 +333,7 @@ const Home = () => {
             cols="50"
           ></textarea>
           <button className="btn submitSharePixel" onClick={handleSharePixel}>
-            Share Pixel
+            {isLoading ? "Đang xử lý..." : "Share Pixel"}
           </button>
           <button
             className="btn exportExcel"

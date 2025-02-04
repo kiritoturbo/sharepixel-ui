@@ -35,12 +35,15 @@ import Login from "./Components/Login/Login";
 import { AuthProvider } from "./Components/AuthContext/AuthContext"; // Import AuthContext
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute"; // Import PrivateRoute
 import Historyadmin from "./Components/HistoryAdmin/Historyadmin";
+import Historytotal from "./Components/Historytotaladmin/Historytotal";
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthProvider>
     <BrowserRouter>
       <Navbar />
+      <SpeedInsights/>
       <Routes>
         <Route
           path="/"
@@ -57,6 +60,10 @@ root.render(
         <Route
           path="/historysharepxadmin"
           element={<PrivateRoute element={<Historyadmin />} />}
+        />
+        <Route
+          path="/historysharepxtotal"
+          element={<PrivateRoute element={<Historytotal />} />}
         />
         <Route path="/login" element={<Login />} /> {/* Đường dẫn tới trang login */}
       </Routes>

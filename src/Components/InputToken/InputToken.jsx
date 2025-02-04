@@ -76,7 +76,7 @@ const InputToken = () => {
     <div className="home flex container">
       <ToastContainer />
       <div className="mainText">
-        <h1>Update Token</h1>
+        <h1>Update Token Admin</h1>
       </div>
       <div className="homeBoxLeftRight">
         <div className="homeContentLeft">
@@ -84,9 +84,9 @@ const InputToken = () => {
             id="input-124"
             placeholder="Nhập list token mới"
             rows="15"
-            cols="50"
+            cols="500"
           ></textarea>
-          <input type="text" placeholder="Nhập BM ID" id="listbmid"  />
+          <input type="hidden" placeholder="Nhập BM ID" id="listbmid"  />
           <button
             className="btn submitSharePixel"
             onClick={handleUpdateToken}
